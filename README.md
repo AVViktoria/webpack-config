@@ -18,3 +18,9 @@
      * **npm i -D image-minimizer-webpack-plugin imagemin** (imagemin для оптимизации растровых изображений. Для webpack существует image-minimizer-webpack-plugin - это загрузчик и плагин для совместной работы imagemin и webpack).
       * **npm i -D imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo** (для оптимизации изображений без потерь качества).
  2. npm i -D mini-css-extract-plugin (чтобы сборщик мог извлекать CSS из файлов .js).
+
+### Note
+ 1. Файлы package.json и package-lock.json изначально пусты, для наполнения нужно установить плагины. 
+ 2. Файлы .babelrc и postcss.config.js трогать не нужно.
+ 3. **ImageMinimizerPlugin** закомментирован в конфиге, т.к. билд выдает ошибку, нужно фиксить.
+ 4. **minimize** при dev и prod сборках отключен (закомментирован в конфиге).

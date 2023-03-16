@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "serve": "webpack serve --open",
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production"
+  }
+}
