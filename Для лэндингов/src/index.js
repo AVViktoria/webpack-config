@@ -1,0 +1,5 @@
+import "./css/normalize.css"
+import "./css/style.css"
+import "./js/header.js"
+import "./js/main.js"
+import "./js/footer.js"

@@ -70,7 +70,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
+      filename: "style.css",
     }),
   ],
 
