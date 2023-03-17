@@ -88,7 +88,7 @@ module.exports = {
     // Удаление старого билда
     new CleanWebpackPlugin(),
 
-    // Обновление страницы в процессе зазработки при запуске dev-server
+    // Для более быстрой перезагрузки измененных модулей без полной перезагрузки страницы
     new webpack.HotModuleReplacementPlugin(),
 
     new MiniCssExtractPlugin({
