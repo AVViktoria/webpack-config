@@ -19,12 +19,13 @@
 
 ***
 
-* ### Плагины для оптимизации картинок и удобства работы:
- 1. `npm i -D svgo` (минификатор, который удаляет лишний код в разметке SVG и тем самым уменьшает размер файла):
-     * `npm i -D image-minimizer-webpack-plugin imagemin` (imagemin для оптимизации растровых изображений. Для webpack существует image-minimizer-webpack-plugin - это загрузчик и плагин для совместной работы imagemin и webpack);
-      * `npm i -D imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo` (для оптимизации изображений без потерь качества).
- 2. `npm i -D mini-css-extract-plugin` (чтобы сборщик мог извлекать CSS из файлов .js).
- 3. `npm install copy-webpack-plugin --save-dev` (копирует отдельные файлы или целые каталоги, которые уже существуют, в каталог сборки, например папку assets из src в папку dist).
+* ### Плагины для оптимизации изображений и удобства работы:
+ 1. `npm install image-minimizer-webpack-plugin imagemin --save-dev` (оптимизирует изображения, стабилен и работает со всеми типами изображений).
+     * `npm install imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo --save-dev` (оптимизация без потерь качества);
+     * `npm install imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo --save-dev` (оптимизация с потерей качества).
+ 2. [Другие плагины для оптимизации изображений.](https://webpack.js.org/plugins/image-minimizer-webpack-plugin/ "")
+ 3. `npm i -D mini-css-extract-plugin` (чтобы сборщик мог извлекать CSS из файлов .js).
+ 4. `npm install copy-webpack-plugin --save-dev` (копирует отдельные файлы или целые каталоги, которые уже существуют, в каталог сборки, например папку assets из src в папку dist).
  
  ***
 
@@ -33,7 +34,8 @@
  2. Файлы .babelrc и postcss.config.js трогать не нужно.
  3. **minimize** при dev и prod сборках отключен (закомментирован в конфиге).
  4. `copy-webpack-plugin` закомментирован в конфиге, при создании билда все картинки собираются в dist/assets, а пути к ним обновляются как в html файле, так и в css при помощи **publicPath** и генератора (16 и 130 строки конфига соответственно)
- 4. `copy-webpack-plugin` по умолчанию не может в процессе разработки добавлять файлы (например, если запустить dev-server и добавить в html разметку картинку, то она не добавится). Чтобы `webpack-dev-server` записывал файлы в выходной каталог во время разработки, можно принудительно сделать это с помощью параметра [writeToDisk](https://github.com/webpack/webpack-dev-middleware#writetodisk "") или плагина [write-file-webpack-plugin](https://github.com/gajus/write-file-webpack-plugin "").
+ 4. `copy-webpack-plugin` по умолчанию не может в процессе разработки добавлять файлы (например, если запустить dev-server и добавить в html разметку изображение, то оно не отобразится/не будет добавлено). Чтобы `webpack-dev-server` записывал файлы в выходной каталог во время разработки, можно принудительно сделать это с помощью параметра [writeToDisk](https://github.com/webpack/webpack-dev-middleware#writetodisk "") или плагина [write-file-webpack-plugin](https://github.com/gajus/write-file-webpack-plugin "").
+ 5. При запуске `webpack-dev-server` создается папка дист, однако она будет пустая, так как бандл будет отправляться браузеру и при каждом изменения в файлах он будет отправлять браузеру новый бандл. Можно оптимизировать процесс, чтобы бандл не пересобирался полностью, а только та часть, которая была изменена. Для этого нужно добавить в plagins следующее: `new webpack.HotModuleReplacementPlugin()` (уже добавлено в этой сборке).
  5. Если при npm run serve (плагин "webpack-dev-server") возникает ошибка `Module not found: Error: Can’t resolve` или `Field <название поля> doesn't contain a valid alias configuration`:
      * Проверить путь к папке "node_modules", название папок не должно содержать символов по типу "#, $, %, *" и тд., даже если такое наименование поддерживается вашей ОС, т.к. сервер не будет автоматически обновляться;
      * Если переименование не помогло, можно попробовать явно указать путь к модулям: 
