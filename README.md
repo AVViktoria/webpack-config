@@ -21,11 +21,12 @@
 
 * ### Плагины для оптимизации изображений и удобства работы:
  1. `npm install image-minimizer-webpack-plugin imagemin --save-dev` (оптимизирует изображения, стабилен и работает со всеми типами изображений).
-     * `npm install imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo --save-dev` (оптимизация без потерь качества);
-     * `npm install imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo --save-dev` (оптимизация с потерей качества).
+     * `npm i imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo --save-dev` (оптимизация без потерь качества);
+     * `npm i imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo --save-dev` (оптимизация с потерей качества).
  2. [Другие плагины для оптимизации изображений.](https://webpack.js.org/plugins/image-minimizer-webpack-plugin/ "")
  3. `npm i -D mini-css-extract-plugin` (чтобы сборщик мог извлекать CSS из файлов .js).
- 4. `npm install copy-webpack-plugin --save-dev` (копирует отдельные файлы или целые каталоги, которые уже существуют, в каталог сборки, например папку assets из src в папку dist).
+ 4. `npm i - D copy-webpack-plugin` (копирует отдельные файлы или целые каталоги, которые уже существуют, в каталог сборки, например папку assets из src в папку dist).
+ 5. `npm i -D html-loader` (в данной сборке используется для обновления путей к изображениям в html файле при сборке).
  
  ***
 
