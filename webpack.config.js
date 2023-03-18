@@ -13,20 +13,16 @@ module.exports = {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    publicPath: "./", // изменяем путь к ресурсам
-    assetModuleFilename: path.join("assets", "[name].[contenthash][ext]"),
+    assetModuleFilename: './assets/[name].[ext]',
+    publicPath: "./"
   },
-
+  
   mode: "development",
   devServer: {
-    static: "./dist",
-    watchFiles: path.join(__dirname, "src"),
     port: 9000,
     hot: true,
-    client: {
-      overlay: true,
-      logging: "info",
-      progress: true,
+    static: {
+      directory: path.join(__dirname, './dist'),
     },
   },
   resolve: {
@@ -34,18 +30,16 @@ module.exports = {
       "webpack-dev-server": path.resolve(
         __dirname,
         "node_modules/webpack-dev-server"
-      ),
+        ),
+      },
     },
-  },
-  optimization: {
-    minimizer: [
-      "...",
-      new ImageMinimizerPlugin({
-        minimizer: {
-          implementation: ImageMinimizerPlugin.imageminMinify,
-          options: {
-            // Lossless optimization with custom option
-            // Feel free to experiment with options for better result for you
+    optimization: {
+      minimizer: [
+        "...",
+        new ImageMinimizerPlugin({
+          minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            options: {
             plugins: [
               ["gifsicle", { interlaced: true }],
               ["jpegtran", { progressive: true }],
@@ -81,20 +75,20 @@ module.exports = {
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.join(__dirname, "src", "index.html"),
-      filename: "index.html",
+      filename: 'index.html',
+      template: 'index.html',
     }),
-
+  
     // Удаление старого билда
     new CleanWebpackPlugin(),
-
+  
     // Для более быстрой перезагрузки измененных модулей без полной перезагрузки страницы
     new webpack.HotModuleReplacementPlugin(),
-
+  
     new MiniCssExtractPlugin({
       filename: "style.css",
     }),
-
+  
     // Для копирования катологов из src в dist
     // new CopyPlugin({
     //   patterns: [
@@ -105,6 +99,13 @@ module.exports = {
 
   module: {
     rules: [
+
+      // Используется для того, чтобы обновлялись пути к изображениям при сборке в html файле
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+
       // Loading js
       {
         test: /\.js$/,
@@ -128,23 +129,17 @@ module.exports = {
         test: /\.(?:ico|gif|png|jpg|jpeg|svg|)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/[name][ext]", // изменяем путь к ресурсам
+          filename: "assets/[name].[ext]", // создает папку и помещает в нее изображения
         },
       },
 
       // Loading fonts and SVG
       {
         test: /\.(woff(2)?|eot|ttf|otf|)$/,
-        type: "asset/inline",
-      },
-
-      {
-        // test: /\.svg$/,
-        // type: "asset/resource",
-        // Переопределяет assetModuleFilename, для формата svg создает папку "icons" в dist для удобства
-        // generator: {
-        //   filename: path.join("icons", "[name].[contenthash][ext]"),
-        // },
+        type: "asset/resource",
+        generator: {
+          filename: "fonts/[name].[ext]", // создает папку и помещает в нее шрифты
+        },
       },
     ],
   },
