@@ -1,3 +1,4 @@
+import "./index.html"
 import "./css/normalize.css"
 import "./style.scss"
 import "./js/header.js"

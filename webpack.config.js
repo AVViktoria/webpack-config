@@ -19,11 +19,15 @@ module.exports = {
   
   mode: "development",
   devServer: {
-    port: 9000,
-    hot: true,
-    static: {
-      directory: path.join(__dirname, './dist'),
+    devMiddleware: {
+      index: true,
+      mimeTypes: { phtml: 'text/html' },
+      publicPath: '/src',
+      serverSideRender: true,
+      writeToDisk: true,
     },
+    static: "dist",
+    watchFiles: path.join(__dirname, "src"),
   },
   resolve: {
     alias: {
@@ -82,8 +86,7 @@ module.exports = {
     // Удаление старого билда
     new CleanWebpackPlugin(),
   
-    // Для более быстрой перезагрузки измененных модулей без полной перезагрузки страницы
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
   
     new MiniCssExtractPlugin({
       filename: "style.css",
