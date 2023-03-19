@@ -17,7 +17,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true,
     publicPath: "./",
-    assetModuleFilename: "assets.[name].[ext]",
+    assetModuleFilename: "images.[name].[ext]",
   },
   mode: "development",
   devServer: {
@@ -46,8 +46,6 @@ module.exports = {
         minimizer: {
           implementation: ImageMinimizerPlugin.imageminMinify,
           options: {
-            // Lossless optimization with custom option
-            // Feel free to experiment with options for better result for you
             plugins: [
               ["gifsicle", { interlaced: true }],
               ["jpegtran", { progressive: true }],
@@ -111,9 +109,6 @@ module.exports = {
     // Удаление старого билда
     new CleanWebpackPlugin(),
 
-    // Обновление страницы в процессе разработки при запуске dev-server
-    // new webpack.HotModuleReplacementPlugin(),
-
     // Для копирования катологов из src в dist
     // new CopyPlugin({
     //   patterns: [
@@ -148,6 +143,7 @@ module.exports = {
           path.resolve(__dirname, "src/page1/style.scss"),
           path.resolve(__dirname, "src/page2/second.scss"),
         ],
+
         // Для исключения правил для файла стилей, который не относится к index.html
         // exclude: /second\.scss$/,
       },
@@ -157,7 +153,7 @@ module.exports = {
         test: /\.(?:ico|gif|png|jpg|jpeg|svg|)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/[name][ext]", // создает папку в dist и добавляет в нее все изображения
+          filename: "images/[name][ext]", // создает папку в dist и добавляет в нее все изображения
         },
       },
 

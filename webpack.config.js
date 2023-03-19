@@ -13,7 +13,7 @@ module.exports = {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    assetModuleFilename: './assets/[name].[ext]',
+    assetModuleFilename: './images/[name].[ext]',
     publicPath: "./"
   },
   
@@ -86,8 +86,6 @@ module.exports = {
     // Удаление старого билда
     new CleanWebpackPlugin(),
   
-    // new webpack.HotModuleReplacementPlugin(),
-  
     new MiniCssExtractPlugin({
       filename: "style.css",
     }),
@@ -132,7 +130,7 @@ module.exports = {
         test: /\.(?:ico|gif|png|jpg|jpeg|svg|)$/i,
         type: "asset/resource",
         generator: {
-          filename: "assets/[name].[ext]", // создает папку и помещает в нее изображения
+          filename: "images/[name].[ext]", // создает папку и помещает в нее изображения
         },
       },
 
